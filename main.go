@@ -1,10 +1,13 @@
 package main
 
-import "net/http"
+import (
+	"net/http"
+	"object_storage/handler"
+)
 
 func main() {
 	//静态资源处理
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("./static"))))
 
-	//http.HandleFunc("/file/upload",handler)
+	http.HandleFunc("/file/upload",handler.UploadHandler)
 }
