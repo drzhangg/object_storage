@@ -1,13 +1,10 @@
 package main
 
-import (
-	"log"
-	"net/http"
-	"object_storage/object"
-	"os"
-)
+import "net/http"
 
 func main() {
-	http.HandleFunc("/objects/", object.Handler)
-	log.Fatal(http.ListenAndServe(os.Getenv("LISTEN_ADDRESS"), nil))
+	//静态资源处理
+	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("./static"))))
+
+	//http.HandleFunc("/file/upload",handler)
 }
