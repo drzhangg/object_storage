@@ -24,4 +24,7 @@ func main() {
 	if err != nil {
 		fmt.Printf("Failed to start server, err:%s", err.Error())
 	}
+
+	//http.HandleFunc("/objects/",object.Handler)
+	//log.Fatal(http.ListenAndServe(os.Getenv("LISTEN_ADDRESS"),nil))
 }

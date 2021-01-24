@@ -14,7 +14,7 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 		get(w, r)
 		return
 	}
-	if m == http.MethodPost {
+	if m == http.MethodPut {
 		put(w, r)
 		return
 	}
@@ -24,7 +24,7 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 func put(w http.ResponseWriter, r *http.Request) {
 	f, err := os.Create(os.Getenv("STORAGE_ROOT") + "/objects/" + strings.Split(r.URL.EscapedPath(), "/")[2])
 	if err != nil {
-		log.Println(err)
+		log.Println("os.create err：",err)
 		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
@@ -35,7 +35,7 @@ func put(w http.ResponseWriter, r *http.Request) {
 func get(w http.ResponseWriter, r *http.Request) {
 	f, err := os.Open(os.Getenv("STORAGE_ROOT") + "/objects/" + strings.Split(r.URL.EscapedPath(), "/")[2])
 	if err != nil {
-		log.Println(err)
+		log.Println("os.open err：",err)
 		w.WriteHeader(http.StatusNotFound)
 		return
 	}
